@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài tập JS</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f5f5f5;
+            padding: 40px;
+        }
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            margin: auto;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .result {
+            margin-top: 20px;
+            background: #eee;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Thông tin sinh viên</h2>
+
+    <input type="text" id="fullName" placeholder="Nhập họ tên không dấu">
+    <input type="text" id="studentId" placeholder="Nhập mã sinh viên">
+
+    <button onclick="xuLy()">Xử lý</button>
+
+    <div class="result" id="output"></div>
+</div>
+
+<script>
+function xuLy() {
+    let fullName = document.getElementById("fullName").value;
+    let studentId = document.getElementById("studentId").value;
+
+    let nameParts = fullName.toLowerCase().trim().split(" ");
+    let lastName = nameParts[nameParts.length - 1];
+
+    let middleInitials = "";
+    for (let i = 0; i < nameParts.length - 1; i++) {
+        middleInitials += nameParts[i][0];
+    }
+
+    let email = `${lastName}${middleInitials}.${studentId.toLowerCase()}@hvnh.edu.vn`;
+
+    let coursePeriod = studentId.substring(0, 2);
+
+    // Lấy mã khoa
+    let facultyCode = studentId.substring(2, 5);
+    let faculty = "";
+
+    // Map khoa (bạn có thể thêm nhiều khoa khác)
+    switch (facultyCode) {
+        case "A40":
+            faculty = "Công nghệ thông tin và Kinh tế số";
+            break;
+        default:
+            faculty = "Không xác định";
+    }
+
+    let last4 = studentId.slice(-4);
+    let sum = 0;
+    for (let char of last4) {
+        sum += parseInt(char);
+    }
+
+    let result = `
+        <p><b>Email:</b> ${email}</p>
+        <p>Xin chào <b>${fullName}</b>, bạn là sinh viên khóa <b>${coursePeriod}</b>, 
+        khoa <b>${faculty}</b>, tổng 4 số cuối là <b>${sum}</b></p>
+    `;
+
+    document.getElementById("output").innerHTML = result;
+}
+</script>
+
+</body>
+</html>
