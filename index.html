@@ -17,8 +17,10 @@
     let parts = fullName.split(" ");
     let firstName = parts[parts.length - 1].toLowerCase();
     let lastName = parts[0][0].toLowerCase();
-    let middleName = parts[1][0].toLowerCase();
-
+    let middleName = "";
+    for (let i = 1; i < parts.length - 1; i++) {
+    middleName += parts[i][0].toLowerCase();
+}
    
     let email = firstName + lastName + middleName + "." + studentId.toLowerCase() + "@hvnh.edu.vn";
 
